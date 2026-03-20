@@ -209,7 +209,7 @@
   .bank-setting-header { display: flex; justify-content: space-between; align-items: center; }
   .bank-num { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
   .bank-color-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .saldo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+  .saldo-row { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
   .danger-zone {
     background: rgba(255,77,106,.05); border: 1px solid rgba(255,77,106,.15);
     border-radius: var(--radius); padding: 16px;
