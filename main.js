@@ -106,9 +106,11 @@ function updateMonthLabels() {
   const html = `<span>${MONTHS[currentMonth]}</span>`;
   const el1 = document.getElementById('month-label');
   const el2 = document.getElementById('month-label-chart');
+  const el3 = document.getElementById('month-label-settings');
   const yr = document.getElementById('year-label');
   if (el1) el1.innerHTML = html;
   if (el2) el2.innerHTML = html;
+  if (el3) el3.innerHTML = html;
   if (yr) yr.textContent = currentYear;
 }
 
@@ -313,29 +315,35 @@ function renderCharts() {
 // ═══════════════════════════════════════════════════════
 function renderSettings() {
   const cont = document.getElementById('banks-grid');
-  cont.innerHTML = state.banks.map(b => `
-    <div class="bank-setting">
-      <div class="bank-setting-header">
-        <span class="bank-num">Banco ${b.id}</span>
-        <div class="bank-color-dot" style="background:${bankColor(b.id)}"></div>
-      </div>
-      <input type="text" value="${b.name}" placeholder="Nombre del banco"
-        onchange="updateBankName(${b.id}, this.value)"
-        style="font-weight:600">
-      <div class="saldo-row">
-        <div class="form-group">
-          <label>Saldo Inicial</label>
-          <input type="number" value="${b.saldoInicial||0}" placeholder="0"
-            onchange="updateBankField(${b.id}, 'saldoInicial', this.value)" step="0.01">
+  const pad = n => String(n).padStart(2,'0');
+  const monthKey = `${currentYear}-${pad(currentMonth+1)}`;
+
+  cont.innerHTML = state.banks.map(b => {
+    const mData = (b.monthlyData && b.monthlyData[monthKey]) || { saldoInicial: 0, fci: 0 };
+    return `
+      <div class="bank-setting">
+        <div class="bank-setting-header">
+          <span class="bank-num">Banco ${b.id}</span>
+          <div class="bank-color-dot" style="background:${bankColor(b.id)}"></div>
         </div>
-        <div class="form-group">
-          <label>FCI</label>
-          <input type="number" value="${b.fci||0}" placeholder="0"
-            onchange="updateBankField(${b.id}, 'fci', this.value)" step="0.01">
+        <input type="text" value="${b.name}" placeholder="Nombre del banco"
+          onchange="updateBankName(${b.id}, this.value)"
+          style="font-weight:600">
+        <div class="saldo-row">
+          <div class="form-group">
+            <label>Saldo Inicial (${MONTHS[currentMonth]})</label>
+            <input type="number" value="${mData.saldoInicial||0}" placeholder="0"
+              onchange="updateBankField(${b.id}, 'saldoInicial', this.value)" step="0.01">
+          </div>
+          <div class="form-group">
+            <label>FCI (${MONTHS[currentMonth]})</label>
+            <input type="number" value="${mData.fci||0}" placeholder="0"
+              onchange="updateBankField(${b.id}, 'fci', this.value)" step="0.01">
+          </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function updateBankName(id, val) {
@@ -344,7 +352,14 @@ function updateBankName(id, val) {
 }
 function updateBankField(id, field, val) {
   const b = state.banks.find(b=>b.id===id);
-  if (b) { b[field] = parseFloat(val)||0; save(); }
+  if (b) {
+    if (!b.monthlyData) b.monthlyData = {};
+    const pad = n => String(n).padStart(2,'0');
+    const monthKey = `${currentYear}-${pad(currentMonth+1)}`;
+    if (!b.monthlyData[monthKey]) b.monthlyData[monthKey] = { saldoInicial: 0, fci: 0 };
+    b.monthlyData[monthKey][field] = parseFloat(val)||0;
+    save();
+  }
 }
 
 // ═══════════════════════════════════════════════════════

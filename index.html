@@ -60,6 +60,11 @@
 
     <!-- ═══ VIEW: SETTINGS ═══ -->
     <div class="view" id="view-settings">
+      <div class="month-nav">
+        <button class="arrow-btn" onclick="changeMonth(-1)">&#8592;</button>
+        <div class="month-label" id="month-label-settings">—</div>
+        <button class="arrow-btn" onclick="changeMonth(1)">&#8594;</button>
+      </div>
       <div class="settings-section">
         <div class="settings-title">Bancos</div>
         <div class="banks-grid" id="banks-grid"></div>
