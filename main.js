@@ -443,6 +443,50 @@ function clearAll() {
   save(); render();
 }
 
+function exportData() {
+  const dataStr = JSON.stringify(state, null, 2);
+  const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+  const exportFileDefaultName = `money-tracker-backup-${new Date().toISOString().slice(0,10)}.json`;
+
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+}
+
+function triggerImport() {
+  document.getElementById('import-input').click();
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const importedState = JSON.parse(e.target.result);
+      
+      // Basic validation
+      if (!importedState.banks || !importedState.movements) {
+        throw new Error('El archivo no tiene el formato correcto.');
+      }
+
+      if (confirm('¿Estás seguro de que quieres importar estos datos? Esto reemplazará los datos actuales.')) {
+        state = importedState;
+        save();
+        render();
+        alert('Datos importados correctamente.');
+      }
+    } catch (err) {
+      alert('Error al importar: ' + err.message);
+    }
+    // Reset input so the same file can be selected again
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
 // close modal on overlay click
 document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
