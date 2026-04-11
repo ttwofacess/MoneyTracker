@@ -73,6 +73,11 @@
         <div class="settings-title">Datos</div>
         <div class="danger-zone">
           <div class="danger-title">Zona de peligro</div>
+          <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+            <button class="btn btn-ghost" onclick="exportData()">📤 Exportar datos (JSON)</button>
+            <button class="btn btn-ghost" onclick="triggerImport()">📥 Importar datos (JSON)</button>
+            <input type="file" id="import-input" style="display: none" accept=".json" onchange="importData(event)">
+          </div>
           <button class="btn btn-danger" onclick="clearAll()">🗑 Borrar todos los datos</button>
         </div>
       </div>
