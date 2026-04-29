@@ -1,0 +1,16 @@
+.bank-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+.bank-tab {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted2); padding: 7px 16px; border-radius: 20px;
+  cursor: pointer; font-size: 13px; font-family: var(--font-sans);
+  transition: all .15s; display: flex; align-items: center; gap: 6px;
+}
+.bank-tab:hover { color: var(--text); border-color: var(--muted); }
+.bank-tab.active { color: var(--accent); border-color: var(--accent); background: rgba(0,212,170,.08); font-weight: 600; }
+.bank-tab .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.all-tab { background: var(--surface); border: 1px solid var(--border); color: var(--muted2); padding: 7px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-family: var(--font-sans); transition: all .15s; }
+.all-tab:hover { color: var(--text); }
+.all-tab.active { color: var(--accent2); border-color: var(--accent2); background: rgba(0,149,255,.08); font-weight: 600; }

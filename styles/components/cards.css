@@ -1,0 +1,21 @@
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 24px;
+}
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+}
+.card-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px; }
+.card-value { font-family: var(--font-mono); font-size: 18px; font-weight: 500; }
+.card-value.in { color: var(--in-color); }
+.card-value.out { color: var(--out-color); }
+.card-value.own-in { color: var(--own-in); }
+.card-value.own-out { color: var(--own-out); }
+.card-value.net.pos { color: var(--in-color); }
+.card-value.net.neg { color: var(--out-color); }
+
+@media (max-width: 600px) {
+  .summary-grid { grid-template-columns: 1fr 1fr; }
+}
