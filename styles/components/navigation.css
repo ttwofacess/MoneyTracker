@@ -1,0 +1,30 @@
+nav { display: flex; gap: 4px; }
+.nav-btn {
+  background: none; border: none; color: var(--muted2); padding: 6px 14px;
+  border-radius: 6px; cursor: pointer; font-family: var(--font-sans); font-size: 13px;
+  transition: all .15s;
+}
+.nav-btn:hover { color: var(--text); background: var(--surface2); }
+.nav-btn.active { color: var(--accent); background: rgba(0,212,170,.1); }
+
+.month-nav {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+}
+.month-label {
+  font-size: 22px; font-weight: 700; min-width: 180px; text-align: center;
+  letter-spacing: -.5px;
+}
+.month-label span { color: var(--accent); }
+.arrow-btn {
+  background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  width: 36px; height: 36px; border-radius: var(--radius); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+  transition: all .15s;
+}
+.arrow-btn:hover { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
+
+.pill-year {
+  background: var(--surface2); border: 1px solid var(--border);
+  padding: 4px 12px; border-radius: 6px; font-size: 13px;
+  font-family: var(--font-mono); color: var(--muted2);
+}

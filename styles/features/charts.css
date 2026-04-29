@@ -1,0 +1,15 @@
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.chart-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+}
+.chart-card-title { font-size: 13px; font-weight: 600; margin-bottom: 16px; color: var(--muted2); text-transform: uppercase; letter-spacing: .5px; }
+canvas { max-width: 100%; }
+
+@media (max-width: 900px) {
+  .charts-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .charts-grid { grid-template-columns: 1fr; }
+}
