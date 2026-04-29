@@ -15,9 +15,9 @@
       Tracker Bancario
     </div>
     <nav>
-      <button class="nav-btn active" onclick="showView('movements')">Movimientos</button>
-      <button class="nav-btn" onclick="showView('charts')">Gráficos</button>
-      <button class="nav-btn" onclick="showView('settings')">Configuración</button>
+      <button class="nav-btn active" data-view="movements">Movimientos</button>
+      <button class="nav-btn" data-view="charts">Gráficos</button>
+      <button class="nav-btn" data-view="settings">Configuración</button>
     </nav>
   </header>
 
@@ -26,9 +26,9 @@
     <!-- ═══ VIEW: MOVEMENTS ═══ -->
     <div class="view active" id="view-movements">
       <div class="month-nav">
-        <button class="arrow-btn" onclick="changeMonth(-1)">&#8592;</button>
+        <button class="arrow-btn" id="prev-month">&#8592;</button>
         <div class="month-label" id="month-label">—</div>
-        <button class="arrow-btn" onclick="changeMonth(1)">&#8594;</button>
+        <button class="arrow-btn" id="next-month">&#8594;</button>
         <div class="pill-year" id="year-label">—</div>
       </div>
 
@@ -42,7 +42,7 @@
       <div class="table-wrap">
         <div class="table-toolbar">
           <span class="table-title" id="table-title">Movimientos</span>
-          <button class="btn btn-primary" onclick="openModal()">+ Agregar</button>
+          <button class="btn btn-primary" id="add-movement-btn">+ Agregar</button>
         </div>
         <div id="table-container"></div>
       </div>
@@ -51,9 +51,9 @@
     <!-- ═══ VIEW: CHARTS ═══ -->
     <div class="view" id="view-charts">
       <div class="month-nav">
-        <button class="arrow-btn" onclick="changeMonth(-1)">&#8592;</button>
+        <button class="arrow-btn" id="prev-month-chart">&#8592;</button>
         <div class="month-label" id="month-label-chart">—</div>
-        <button class="arrow-btn" onclick="changeMonth(1)">&#8594;</button>
+        <button class="arrow-btn" id="next-month-chart">&#8594;</button>
       </div>
       <div class="charts-grid" id="charts-container"></div>
     </div>
@@ -61,9 +61,9 @@
     <!-- ═══ VIEW: SETTINGS ═══ -->
     <div class="view" id="view-settings">
       <div class="month-nav">
-        <button class="arrow-btn" onclick="changeMonth(-1)">&#8592;</button>
+        <button class="arrow-btn" id="prev-month-settings">&#8592;</button>
         <div class="month-label" id="month-label-settings">—</div>
-        <button class="arrow-btn" onclick="changeMonth(1)">&#8594;</button>
+        <button class="arrow-btn" id="next-month-settings">&#8594;</button>
       </div>
       <div class="settings-section">
         <div class="settings-title">Bancos</div>
@@ -74,11 +74,11 @@
         <div class="danger-zone">
           <div class="danger-title">Zona de peligro</div>
           <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-            <button class="btn btn-ghost" onclick="exportData()">📤 Exportar datos (JSON)</button>
-            <button class="btn btn-ghost" onclick="triggerImport()">📥 Importar datos (JSON)</button>
-            <input type="file" id="import-input" style="display: none" accept=".json" onchange="importData(event)">
+            <button class="btn btn-ghost" id="export-btn">📤 Exportar datos (JSON)</button>
+            <button class="btn btn-ghost" id="trigger-import-btn">📥 Importar datos (JSON)</button>
+            <input type="file" id="import-input" style="display: none" accept=".json">
           </div>
-          <button class="btn btn-danger" onclick="clearAll()">🗑 Borrar todos los datos</button>
+          <button class="btn btn-danger" id="clear-all-btn">🗑 Borrar todos los datos</button>
         </div>
       </div>
     </div>
@@ -121,13 +121,13 @@
       </div>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveMovement()">Guardar</button>
+      <button class="btn btn-ghost" id="close-modal-btn">Cancelar</button>
+      <button class="btn btn-primary" id="save-movement-btn">Guardar</button>
     </div>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="main.js"></script>
+<script type="module" src="main.js"></script>
 </body>
 </html>
