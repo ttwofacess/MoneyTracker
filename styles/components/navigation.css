@@ -7,6 +7,24 @@ nav { display: flex; gap: 4px; }
 .nav-btn:hover { color: var(--text); background: var(--surface2); }
 .nav-btn.active { color: var(--accent); background: rgba(0,212,170,.1); }
 
+@media (max-width: 600px) {
+  nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .nav-btn {
+    width: 100%;
+  }
+  nav .nav-btn:nth-child(3) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
 .month-nav {
   display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
 }
